@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard 1</title>
+    <title>Dashboard 2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
@@ -321,7 +321,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <div>
+                        <canvas id="myChart1" width="250px" height="250px" style="margin:0 auto;"></canvas>
+                        <p style="text-align: center;font-style:italic;">The graph above is independent from the Reachibility filter</p>
+                    </div>
+                    <div>
+                        <canvas id="myChart2"></canvas>
+                        <p style="text-align: center;font-style:italic;">The graph above is based on year selected</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -330,6 +339,91 @@
     </script>
     <script src="https://kit.fontawesome.com/7226972f8e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
+    <script>
+        var ctx1 = document.getElementById('myChart1');
+        var myChart1 = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Abeille Royale', '(Blank)'],
+                datasets: [{
+                    data: [5.27, 94.73],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    borderColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    title : {
+                        display: true,
+                        text : 'Monthly CRM Sell-Out Split'
+                    },
+                    legend : {
+                        display:true,
+                        position:'bottom',
+                    }
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('myChart2');
+        var myChart2 = new Chart(ctx2,{
+            type:'line',
+            data:{
+                labels: [202007,202008,202009,202010,202011,202012,202101,202102,202103,202104,202105,202106],
+                datasets: [{
+                    label: 'Avg Spenpding (12M)',
+                    data: [394,387,408,421,354,346,359,405,397,420],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    borderColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Avg basket (12M)',
+                    data: [346.95, 342.77,354.25,385.72,339.52,312.22,329.16,359.11,342.58,369.36,381.45,368.81],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    borderColor: ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 1)'],
+                    yAxisID: 'y1',
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Evolution of Average basket and spending per CRM customer'
+                    },
+                    legend : {
+                        display:true,
+                        position:'bottom',
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                
+                        // grid line settings
+                        grid: {
+                            drawOnChartArea: false, // only want the grid lines for one axis to show up
+                        },
+                    },
+                }
+            },
+        });
+    </script>
 </body>
 
 </html>

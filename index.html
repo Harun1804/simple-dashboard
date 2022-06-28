@@ -313,15 +313,35 @@
                     </div>
                 </div>
                 <div class="col-lg">
-
+                    <div>
+                        <canvas id="myChart1" width="200px" height="200px"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    
+                    <div>
+                        <canvas id="myChart2" width="200px" height="200px"></canvas>
+                    </div>
                 </div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div>
+                        <canvas id="myChart3" width="250px" height="250px" style="margin:0 auto;"></canvas>
+                    </div>
+                    <div>
+                        <canvas id="myChart4" width="250px" height="250px" style="margin:0 auto;"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        <canvas id="myChart5" width="500px" height="500px"></canvas>
+                    </div>
+                    <p style="font-style: italic;">
+                        Local Customner : At least 2 purchases in the last 12M <br>
+                        VIP Customer: At least 3 purchases in the last 12M <br>
+                        New Customer: 1st purchase in the last 12M
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -330,6 +350,200 @@
     </script>
     <script src="https://kit.fontawesome.com/7226972f8e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
+    <script>
+        var ctx1 = document.getElementById('myChart1');
+        var myChart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Active - 12M','Active - 6M','Active - 3M','Monthly'],
+                datasets: [{
+                    data: [3.33,1.50,0.65,0.18],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                },{
+                    data: [-3.33,-1.50,-0.65,-0.18],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                indexAxis : 'y',
+                plugins: {
+                    title : {
+                        display: true,
+                        text : 'Active Customers'
+                    },
+                    legend : {
+                        display:false
+                    }
+                },
+                scales: {
+                    x : {
+                        stacked: true,
+                    },
+                    y: {
+                        beginAtZero:true,
+                        stacked:true
+                    }
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('myChart2');
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: [202007, 202008, 202009, 202010, 202011, 202012,202101,202102,202103,202104,202105,202106],
+                datasets: [
+                {
+                    label: 'existing customer',
+                    data: [296,332,310,239,305,298, 227,225,221,189,201,124],
+                    borderColor: ' #FF6A74',
+                    backgroundColor: '#FFC0CB',
+                    fill:'origin',
+                },{
+                    label: 'New Customer',
+                    data: [232,220,235,169,190,205,164,139,209,100,66],
+                    borderColor: '#0000FF',
+                    backgroundColor: '#ddddff',
+                    fill:'origin',
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Customer - Split Between new and existing'
+                    },
+                    legend: {
+                        display: true,
+                        position:'bottom'
+                    },
+                    filler: {
+                        propagate: false,
+                    },
+                    interaction: {
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+
+        var ctx3 = document.getElementById('myChart3');
+        var myChart3 = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['Existing', 'New'],
+                datasets: [{
+                    data: [69.66, 30.34],
+                    backgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(54, 162, 235, 0.2)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Split between new and existing - Monthly'
+                    },
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+
+        var ctx4 = document.getElementById('myChart4');
+        var myChart4 = new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: ['Existing', 'New'],
+                datasets: [{
+                    data: [40.47, 59.53],
+                    backgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(54, 162, 235, 0.2)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Split between new and existing - 12M'
+                    },
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+
+        var ctx5 = document.getElementById('myChart5');
+        var myChart5 = new Chart(ctx5, {
+            type: 'bar',
+            data: {
+                labels: ['2020-Jul','2020-Aug','2020-Sep','2020-Oct','2020-Now','2020-Dec','2021-Jan','2021-Feb','2021-Mar','2021-Apr','2021-Mei','Current Month'],
+                datasets: [
+                {
+                    label : "VIP - 12M",
+                    data: [200,300,200,200,300,200,200,200,300,300,200,200],
+                    backgroundColor: ['rgba(15, 100, 245, 1)'],
+                },
+                {
+                    label : "Loyal - 12M",
+                    data: [1100,1100,1100,1000,1000,1000,1000,1000,1000,1000,1000,1000],
+                    backgroundColor: ['rgba(54, 162, 235, 1)'],
+                },
+                {
+                    label : "New - 12M",
+                    data: [2000,2000,2100,2000,2000,2000,2000,2000,2100,2200,2100,2000],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                },
+                {
+                    label : "Active - 12M",
+                    data: [3600,3600,3600,3500,3500,3400,3400,3400,3500,3600,3500,3300],
+                    backgroundColor: ['rgba(60, 0, 235, 0.2)'],
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Evolution of Active, Loyal, VIP and New customers'
+                    },
+                    legend: {
+                        display: true,
+                        position:'bottom'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
